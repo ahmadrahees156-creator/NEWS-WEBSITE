@@ -19,3 +19,15 @@ export const getTopHeadlines = async () => {
 
   return response.data.articles
 }
+
+export const searchNews = async (query) => {
+  const response = await newsApi.get('/everything', {
+    params: {
+      q: query,
+      pageSize: 20,
+      language: 'en'
+    }
+  })
+
+  return response.data.articles
+}

@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react'
 import NewsItem from './NewsItem'
-import { getTopHeadlines } from '../services/newsApi'
+import { getTopHeadlines, searchNews } from '../services/newsApi'
 
-function NewsList() {
+function NewsList({ search }) {
   const [news, setNews] = useState([])
 
   useEffect(() => {
     const fetchNews = async () => {
-      const articles = await getTopHeadlines()
+      let articles
+
+      if (search.trim() === '') {
+        articles = await getTopHeadlines()
+      } else {
+        articles = await searchNews(search)
+      }
+
       setNews(articles)
     }
 
     fetchNews()
-  }, [])
+  }, [search])
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
