@@ -40,44 +40,64 @@ function Home() {
         </button>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-3 mb-10">
+    <div className="flex flex-wrap justify-center gap-3 mb-10">
 
-        <button
-          onClick={() => handleCategory('')}
-          className="bg-gray-800 text-white px-4 py-2 rounded-lg"
-        >
-          All
-        </button>
+  <button
+    onClick={() => handleCategory('')}
+    className={`px-4 py-2 rounded-lg ${
+      category === ''
+        ? 'bg-gray-900 text-white'
+        : 'bg-gray-200 text-gray-800'
+    }`}
+  >
+    All
+  </button>
 
-        <button
-          onClick={() => handleCategory('business')}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-        >
-          Business
-        </button>
+  <button
+    onClick={() => handleCategory('business')}
+    className={`px-4 py-2 rounded-lg ${
+      category === 'business'
+        ? 'bg-blue-600 text-white'
+        : 'bg-gray-200 text-gray-800'
+    }`}
+  >
+    Business
+  </button>
 
-        <button
-          onClick={() => handleCategory('technology')}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-        >
-          Technology
-        </button>
+  <button
+    onClick={() => handleCategory('technology')}
+    className={`px-4 py-2 rounded-lg ${
+      category === 'technology'
+        ? 'bg-blue-600 text-white'
+        : 'bg-gray-200 text-gray-800'
+    }`}
+  >
+    Technology
+  </button>
 
-        <button
-          onClick={() => handleCategory('sports')}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-        >
-          Sports
-        </button>
+  <button
+    onClick={() => handleCategory('sports')}
+    className={`px-4 py-2 rounded-lg ${
+      category === 'sports'
+        ? 'bg-blue-600 text-white'
+        : 'bg-gray-200 text-gray-800'
+    }`}
+  >
+    Sports
+  </button>
 
-        <button
-          onClick={() => handleCategory('entertainment')}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-        >
-          Entertainment
-        </button>
+  <button
+    onClick={() => handleCategory('entertainment')}
+    className={`px-4 py-2 rounded-lg ${
+      category === 'entertainment'
+        ? 'bg-blue-600 text-white'
+        : 'bg-gray-200 text-gray-800'
+    }`}
+  >
+    Entertainment
+  </button>
 
-      </div>
+</div>
 
       <NewsList search={query} category={category} />
 
