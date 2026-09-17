@@ -2,15 +2,22 @@ import { useState } from 'react'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Home from './pages/Home'
 
 function App() {
   
 
   return (
-     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-blue-600">
-        News Website
-      </h1>
+    <div className='min-h-screen flex flex-col'>
+      
+      <header/>
+
+      <Home/>
+
+      <Footer/>
+
     </div>
   )
 }
