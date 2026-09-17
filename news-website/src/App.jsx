@@ -1,24 +1,23 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
+import NewsDetail from './pages/NewsDetail'
 
 function App() {
-  
-
   return (
-    <div className='min-h-screen flex flex-col'>
-      
-      <header/>
+    <BrowserRouter>
+      <div className="min-h-screen flex flex-col">
+        <Header />
 
-      <Home/>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/news/:id" element={<NewsDetail />} />
+        </Routes>
 
-      <Footer/>
-
-    </div>
+        <Footer />
+      </div>
+    </BrowserRouter>
   )
 }
 

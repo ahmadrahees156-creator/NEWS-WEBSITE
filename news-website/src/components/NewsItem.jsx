@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom'
 
 function NewsItem({ article }) {
   return (
     <article className="bg-white rounded-lg shadow-md overflow-hidden">
+
       <img
         src={article.urlToImage}
         alt={article.title}
@@ -20,7 +22,16 @@ function NewsItem({ article }) {
         <p className="text-sm text-gray-500">
           Published: {new Date(article.publishedAt).toLocaleDateString()}
         </p>
+
+        <Link
+  to={`/news/${encodeURIComponent(article.title)}`}
+  state={article}
+          className="inline-block mt-4 text-blue-600 font-semibold"
+        >
+          Read More →
+        </Link>
       </div>
+
     </article>
   )
 }
