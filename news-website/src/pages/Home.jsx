@@ -4,9 +4,16 @@ import NewsList from '../components/NewsList'
 function Home() {
   const [search, setSearch] = useState('')
   const [query, setQuery] = useState('')
+  const [category, setCategory] = useState('')
 
   const handleSearch = () => {
     setQuery(search)
+    setCategory('')
+  }
+
+  const handleCategory = (selectedCategory) => {
+    setCategory(selectedCategory)
+    setQuery('')
   }
 
   return (
@@ -16,8 +23,7 @@ function Home() {
         Latest News
       </h2>
 
-      <div className="max-w-xl mx-auto mb-10 flex gap-2">
-
+      <div className="max-w-xl mx-auto mb-6 flex gap-2">
         <input
           type="text"
           placeholder="Search news..."
@@ -32,10 +38,48 @@ function Home() {
         >
           Search
         </button>
+      </div>
+
+      <div className="flex flex-wrap justify-center gap-3 mb-10">
+
+        <button
+          onClick={() => handleCategory('')}
+          className="bg-gray-800 text-white px-4 py-2 rounded-lg"
+        >
+          All
+        </button>
+
+        <button
+          onClick={() => handleCategory('business')}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+        >
+          Business
+        </button>
+
+        <button
+          onClick={() => handleCategory('technology')}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+        >
+          Technology
+        </button>
+
+        <button
+          onClick={() => handleCategory('sports')}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+        >
+          Sports
+        </button>
+
+        <button
+          onClick={() => handleCategory('entertainment')}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+        >
+          Entertainment
+        </button>
 
       </div>
 
-      <NewsList search={query} />
+      <NewsList search={query} category={category} />
 
     </main>
   )

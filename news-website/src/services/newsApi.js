@@ -31,3 +31,15 @@ export const searchNews = async (query) => {
 
   return response.data.articles
 }
+
+export const getCategoryNews = async (category) => {
+  const response = await newsApi.get('/top-headlines', {
+    params: {
+      country: 'us',
+      category: category,
+      pageSize: 20
+    }
+  })
+
+  return response.data.articles
+}
