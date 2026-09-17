@@ -2,34 +2,53 @@ import { Link } from 'react-router-dom'
 
 function NewsItem({ article }) {
   return (
-    <article className="bg-white rounded-lg shadow-md overflow-hidden">
+    <article className="bg-[#fffdf8] rounded-2xl shadow-md overflow-hidden border border-[#e5d8c8] hover:shadow-xl hover:-translate-y-1 transition duration-300">
 
-      <img
-        src={article.urlToImage}
-        alt={article.title}
-        className="w-full h-48 object-cover"
-      />
+      <div className="relative overflow-hidden">
+
+        <img
+          src={article.urlToImage}
+          alt={article.title}
+          className="w-full h-52 object-cover hover:scale-105 transition duration-500"
+        />
+
+        <span className="absolute top-3 left-3 bg-[#8b5e34] text-white text-xs font-semibold px-3 py-1 rounded-full">
+          NEWS
+        </span>
+
+      </div>
+
 
       <div className="p-5">
-        <h3 className="text-xl font-bold mb-2">
+
+        <p className="text-sm text-[#8b5e34] font-semibold mb-2">
+          {article.source?.name}
+        </p>
+
+        <h3 className="text-xl font-bold text-[#3b2f2f] mb-3 line-clamp-2">
           {article.title}
         </h3>
 
-        <p className="text-gray-600 mb-3">
-          {article.description}
+        <p className="text-[#6b5b4d] mb-4 line-clamp-3">
+          {article.description || 'Read the latest details about this story.'}
         </p>
 
-        <p className="text-sm text-gray-500">
-          Published: {new Date(article.publishedAt).toLocaleDateString()}
-        </p>
+        <div className="flex items-center justify-between">
 
-        <Link
-  to={`/news/${encodeURIComponent(article.title)}`}
-  state={article}
-          className="inline-block mt-4 text-blue-600 font-semibold"
-        >
-          Read More →
-        </Link>
+          <p className="text-sm text-[#9a8978]">
+            {new Date(article.publishedAt).toLocaleDateString()}
+          </p>
+
+          <Link
+            to={`/news/${encodeURIComponent(article.title)}`}
+            state={article}
+            className="text-[#8b5e34] font-semibold hover:text-[#5f3d20] transition"
+          >
+            Read More →
+          </Link>
+
+        </div>
+
       </div>
 
     </article>
