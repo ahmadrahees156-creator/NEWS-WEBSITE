@@ -6,7 +6,7 @@ The website gets news from an API and allows users to search news, filter news b
 
 ## Live Website
 
-[Open News Website](https://newswebsite-catt.vercel.app/)
+[Open News Website](https://news-web-beta-opal.vercel.app/)
 
 ## Features
 
