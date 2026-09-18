@@ -1,16 +1,38 @@
-# React + Vite
+# News Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a news website made as a frontend project using React.js.
 
-Currently, two official plugins are available:
+The website gets news from an API and allows users to search news, filter news by category and open an article to see more details.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Website
 
-## React Compiler
+[Open News Website](https://newswebsite-catt.vercel.app/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Latest news
+- Search news
+- Category filter
+- News details page
+- News images
+- Responsive design
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technologies Used
+
+- React.js
+- Vite
+- Tailwind CSS
+- Axios
+- React Router DOM
+- The News API
+
+## Project Structure
+
+```text
+src/
+├── components/
+├── pages/
+├── services/
+├── App.jsx
+├── index.css
+└── main.jsx
