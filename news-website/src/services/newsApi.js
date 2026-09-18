@@ -1,23 +1,20 @@
 import axios from 'axios'
 
-const API_KEY = import.meta.env.VITE_NEWS_API_KEY
+const API_KEY = import.meta.env.VITE_NEWSDATA_API_KEY
 
-const newsApi = axios.create({
-  baseURL: 'https://api.thenewsapi.com/v1/news',
-  timeout: 15000
-})
+const API_URL = 'https://newsdata.io/api/1/latest'
 
 const formatArticle = (article = {}) => {
   return {
-    id: article.uuid || article.url || article.title,
+    id: article.article_id || article.link || article.title,
     title: article.title || 'No title available',
-    description: article.description || article.snippet || '',
+    description: article.description || '',
     image: article.image_url || '',
-    published_at: article.published_at || '',
-    sitename: article.source || 'News',
-    url: article.url || '',
-    text: article.snippet || '',
-    categories: article.categories || []
+    published_at: article.pubDate || '',
+    sitename: article.source_name || 'News',
+    url: article.link || '',
+    text: article.content || article.description || '',
+    categories: article.category || []
   }
 }
 
@@ -25,85 +22,58 @@ const removeDuplicates = (articles) => {
   const seen = new Set()
 
   return articles.filter((article) => {
-    const key = article.id
-
-    if (!key || seen.has(key)) {
+    if (seen.has(article.id)) {
       return false
     }
 
-    seen.add(key)
+    seen.add(article.id)
     return true
   })
 }
 
-const getResults = (data) => {
-  const articles = Array.isArray(data?.data)
-    ? data.data
-    : []
-
-  return removeDuplicates(
-    articles
-      .map(formatArticle)
-      .filter((article) => article.title)
-  )
-}
-
 export const getTopHeadlines = async () => {
-  const requests = [1, 2, 3].map((page) =>
-    newsApi.get('/all', {
-      params: {
-        api_token: API_KEY,
-        language: 'en',
-        limit: 3,
-        page: page,
-        sort: 'published_at'
-      }
-    })
-  )
-
-  const responses = await Promise.all(requests)
-
-  const articles = responses.flatMap(
-    (response) => getResults(response.data)
-  )
-
-  return removeDuplicates(articles)
-}
-
-export const searchNews = async (query) => {
-  const response = await newsApi.get('/all', {
+  const response = await axios.get(API_URL, {
     params: {
-      api_token: API_KEY,
-      search: query,
-      search_fields: 'title,description',
-      language: 'en',
-      limit: 3,
-      sort: 'relevance_score'
+      apikey: API_KEY,
+      language: 'en'
     }
   })
 
-  return getResults(response.data)
+  const articles = response.data.results || []
+
+  return removeDuplicates(
+    articles.map(formatArticle)
+  )
+}
+
+export const searchNews = async (query) => {
+  const response = await axios.get(API_URL, {
+    params: {
+      apikey: API_KEY,
+      q: query,
+      language: 'en'
+    }
+  })
+
+  const articles = response.data.results || []
+
+  return removeDuplicates(
+    articles.map(formatArticle)
+  )
 }
 
 export const getCategoryNews = async (category) => {
-  const requests = [1, 2, 3].map((page) =>
-    newsApi.get('/all', {
-      params: {
-        api_token: API_KEY,
-        categories: category,
-        language: 'en',
-        limit: 3,
-        page: page,
-        sort: 'published_at'
-      }
-    })
+  const response = await axios.get(API_URL, {
+    params: {
+      apikey: API_KEY,
+      category: category,
+      language: 'en'
+    }
+  })
+
+  const articles = response.data.results || []
+
+  return removeDuplicates(
+    articles.map(formatArticle)
   )
-
-  const responses = await Promise.all(requests)
-
-  const articles = responses.flatMap(
-    (response) => getResults(response.data)
-  )
-
-  return removeDuplicates(articles)
 }
