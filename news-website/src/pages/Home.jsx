@@ -14,34 +14,45 @@ function Home() {
   const handleCategory = (selectedCategory) => {
     setCategory(selectedCategory)
     setQuery('')
+    setSearch('')
   }
 
   return (
     <main className="min-h-screen bg-[#f5f1e8]">
 
       {/* Hero Section */}
-      <section className="bg-[#3b2f2f] text-[#f5f1e8] px-6 py-16">
+
+      <section className="bg-[#3b2f2f] text-[#f5f1e8] px-4 sm:px-6 py-14 sm:py-16">
+
         <div className="max-w-6xl mx-auto text-center">
 
-          <p className="text-[#c49a6c] font-semibold mb-3 tracking-widest">
-            STAY INFORMED
+          <p className="text-[#c49a6c] font-semibold mb-3 tracking-widest text-sm">
+             STAY INFORMED
           </p>
 
-          <h2 className="text-4xl md:text-6xl font-bold mb-5">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5">
+
             Latest News,
-            <span className="text-[#c49a6c]"> All in One Place</span>
+            <span className="text-[#c49a6c]">
+              {' '}All in One Place
+            </span>
+
           </h2>
 
-          <p className="text-[#d6c8b8] max-w-2xl mx-auto text-lg">
+          <p className="text-[#d6c8b8] max-w-2xl mx-auto text-base sm:text-lg">
+
             Discover the latest stories, trending topics and breaking news
             from around the world.
+
           </p>
 
         </div>
+
       </section>
 
 
-      {/* Search Section */}
+      {/* Search */}
+
       <section className="max-w-6xl mx-auto px-4 -mt-7 relative">
 
         <div className="bg-[#fffdf8] rounded-2xl shadow-lg p-4 border border-[#e5d8c8]">
@@ -84,17 +95,18 @@ function Home() {
 
 
       {/* Categories */}
+
       <section className="max-w-6xl mx-auto px-4 pt-10">
 
         <h3 className="text-xl font-bold mb-4 text-[#3b2f2f]">
           Explore Categories
         </h3>
 
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
 
           <button
             onClick={() => handleCategory('')}
-            className={`px-5 py-2.5 rounded-full font-medium transition ${
+            className={`px-4 sm:px-5 py-2.5 rounded-full font-medium transition ${
               category === ''
                 ? 'bg-[#3b2f2f] text-white'
                 : 'bg-[#fffdf8] text-[#5c4b3e] border border-[#dfd1c0] hover:bg-[#e9dfd2]'
@@ -103,9 +115,10 @@ function Home() {
              All
           </button>
 
+
           <button
             onClick={() => handleCategory('business')}
-            className={`px-5 py-2.5 rounded-full font-medium transition ${
+            className={`px-4 sm:px-5 py-2.5 rounded-full font-medium transition ${
               category === 'business'
                 ? 'bg-[#8b5e34] text-white'
                 : 'bg-[#fffdf8] text-[#5c4b3e] border border-[#dfd1c0] hover:bg-[#e9dfd2]'
@@ -114,9 +127,10 @@ function Home() {
              Business
           </button>
 
+
           <button
-            onClick={() => handleCategory('technology')}
-            className={`px-5 py-2.5 rounded-full font-medium transition ${
+            onClick={() => handleCategory('tech')}
+            className={`px-4 sm:px-5 py-2.5 rounded-full font-medium transition ${
               category === 'technology'
                 ? 'bg-[#8b5e34] text-white'
                 : 'bg-[#fffdf8] text-[#5c4b3e] border border-[#dfd1c0] hover:bg-[#e9dfd2]'
@@ -125,9 +139,10 @@ function Home() {
              Technology
           </button>
 
+
           <button
             onClick={() => handleCategory('sports')}
-            className={`px-5 py-2.5 rounded-full font-medium transition ${
+            className={`px-4 sm:px-5 py-2.5 rounded-full font-medium transition ${
               category === 'sports'
                 ? 'bg-[#8b5e34] text-white'
                 : 'bg-[#fffdf8] text-[#5c4b3e] border border-[#dfd1c0] hover:bg-[#e9dfd2]'
@@ -136,9 +151,10 @@ function Home() {
              Sports
           </button>
 
+
           <button
             onClick={() => handleCategory('entertainment')}
-            className={`px-5 py-2.5 rounded-full font-medium transition ${
+            className={`px-4 sm:px-5 py-2.5 rounded-full font-medium transition ${
               category === 'entertainment'
                 ? 'bg-[#8b5e34] text-white'
                 : 'bg-[#fffdf8] text-[#5c4b3e] border border-[#dfd1c0] hover:bg-[#e9dfd2]'
@@ -153,21 +169,28 @@ function Home() {
 
 
       {/* News Section */}
+
       <section className="max-w-6xl mx-auto px-4 py-10">
 
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-6">
 
           <div>
+
             <p className="text-[#8b5e34] font-semibold text-sm">
               {category ? category.toUpperCase() : 'LATEST'}
             </p>
 
-            <h2 className="text-3xl font-bold text-[#3b2f2f]">
-              {query ? `Results for "${query}"` : 'Latest News'}
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#3b2f2f]">
+
+              {query
+                ? `Results for "${query}"`
+                : 'Latest News'}
+
             </h2>
+
           </div>
 
-          <span className="hidden sm:block text-[#8b7a6a]">
+          <span className="text-[#8b7a6a]">
              News
           </span>
 

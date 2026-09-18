@@ -17,19 +17,22 @@ function NewsList({ search, category }) {
         setLoading(true)
         setError('')
 
-        let articles
+        let articles = []
 
-        if (category !== '') {
+        if (category) {
           articles = await getCategoryNews(category)
-        } else if (search.trim() !== '') {
-          articles = await searchNews(search)
+        } else if (search.trim()) {
+          articles = await searchNews(search.trim())
         } else {
           articles = await getTopHeadlines()
         }
 
-        setNews(articles)
+        setNews(Array.isArray(articles) ? articles : [])
+
       } catch (err) {
-        setError('Failed to fetch news. Please try again.')
+        console.error('News API Error:', err)
+        setNews([])
+        setError('Unable to load news right now.')
       } finally {
         setLoading(false)
       }
@@ -40,23 +43,54 @@ function NewsList({ search, category }) {
 
   if (loading) {
     return (
-      <p className="text-center text-lg font-semibold">
-        Loading news...
-      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        {[1, 2, 3, 4, 5, 6].map((item) => (
+          <div
+            key={item}
+            className="bg-[#fffdf8] rounded-2xl shadow-md overflow-hidden border border-[#e5d8c8] animate-pulse"
+          >
+
+            <div className="h-48 bg-[#e5d8c8]" />
+
+            <div className="p-5 space-y-3">
+
+              <div className="h-4 bg-[#e5d8c8] rounded w-1/3" />
+
+              <div className="h-6 bg-[#e5d8c8] rounded" />
+
+              <div className="h-4 bg-[#e5d8c8] rounded" />
+
+              <div className="h-4 bg-[#e5d8c8] rounded w-2/3" />
+
+            </div>
+
+          </div>
+        ))}
+
+      </div>
     )
   }
 
   if (error) {
     return (
-      <p className="text-center text-red-600 font-semibold">
-        {error}
-      </p>
+      <div className="text-center py-12">
+
+        <p className="text-red-700 font-semibold text-lg">
+          {error}
+        </p>
+
+        <p className="text-[#8b7a6a] mt-2">
+          Please refresh the page and try again.
+        </p>
+
+      </div>
     )
   }
 
   if (news.length === 0) {
     return (
-      <p className="text-center text-gray-600 font-semibold">
+      <p className="text-center text-[#6b5b4d] font-semibold py-12">
         No news found.
       </p>
     )
@@ -64,9 +98,14 @@ function NewsList({ search, category }) {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
       {news.map((article, index) => (
-        <NewsItem key={index} article={article} />
+        <NewsItem
+          key={article.url || article.title || index}
+          article={article}
+        />
       ))}
+
     </div>
   )
 }
